@@ -1,0 +1,213 @@
+// Variables
+$primary-color: #C8A27E;
+$secondary-color: #8B6A4F;
+$background-color: #FDF6F3;
+$shadow-color: rgba(0, 0, 0, 0.2);
+$hover-color: darken($primary-color, 10%);
+
+// Main container styles
+.column {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 2rem;
+  background-color: $background-color;
+
+  &.gap-1 {
+    gap: 1rem;
+  }
+}
+
+// Add Product Button
+.add-product-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 10;
+  background-color: $primary-color;
+  border: none;
+  padding: 1rem 1.5rem;
+  border-radius: 50px;
+  box-shadow: 0 4px 15px $shadow-color;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba($shadow-color, 0.3);
+    background-color: $hover-color;
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 15px $shadow-color;
+  }
+
+  .p-button-icon {
+    margin-right: 0.5rem;
+    font-size: 1.1rem;
+  }
+}
+
+// Products Grid
+.row.wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin: 2rem 0;
+  justify-content: center;
+
+  &.space-between {
+    justify-content: space-between;
+    
+    @media (max-width: 768px) {
+      justify-content: center;
+    }
+  }
+}
+
+// Paginator Customization
+::ng-deep .p-paginator {
+  background: transparent;
+  border: none;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: auto;
+
+  .p-paginator-current,
+  .p-paginator-rpp-label {
+    color: $secondary-color;
+    font-weight: 500;
+  }
+
+  .p-paginator-page,
+  .p-paginator-first,
+  .p-paginator-prev,
+  .p-paginator-next,
+  .p-paginator-last {
+    min-width: 2.5rem;
+    height: 2.5rem;
+    margin: 0 0.2rem;
+    border-radius: 50%;
+    background-color: transparent;
+    color: $secondary-color;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: rgba($primary-color, 0.1);
+      color: $primary-color;
+      transform: translateY(-1px);
+    }
+
+    &.p-highlight {
+      background-color: $primary-color;
+      color: white;
+      border-color: $primary-color;
+
+      &:hover {
+        background-color: $hover-color;
+      }
+    }
+  }
+
+  .p-dropdown {
+    background-color: transparent;
+    border: 1px solid $primary-color;
+    border-radius: 25px;
+    
+    .p-dropdown-label {
+      padding: 0.8rem 1rem 0rem 1rem;
+      color: $secondary-color;
+    }
+
+    &:hover {
+      border-color: $hover-color;
+    }
+
+    &.p-focus {
+      box-shadow: 0 0 0 2px rgba($primary-color, 0.2);
+    }
+  }
+
+  // Rows per page dropdown
+  ::ng-deep .p-dropdown-panel {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba($shadow-color, 0.15);
+
+    .p-dropdown-item {
+      padding: 0.75rem 1rem;
+      color: $secondary-color;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: rgba($primary-color, 0.1);
+        color: $primary-color;
+      }
+
+      &.p-highlight {
+        background-color: $primary-color;
+        color: white;
+      }
+    }
+  }
+}
+
+// Responsive styles
+@media (max-width: 768px) {
+  .column {
+    padding: 1rem;
+  }
+
+  ::ng-deep .p-paginator {
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 0.5rem;
+
+    .p-paginator-page,
+    .p-paginator-first,
+    .p-paginator-prev,
+    .p-paginator-next,
+    .p-paginator-last {
+      min-width: 2rem;
+      height: 2rem;
+    }
+  }
+
+  .add-product-btn {
+    bottom: 15px;
+    right: 15px;
+    padding: 0.75rem 1.25rem;
+  }
+}
+
+// Optional: Loading State
+.loading {
+  position: relative;
+  pointer-events: none;
+  opacity: 0.7;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    animation: loading 1.5s infinite;
+  }
+}
+
+@keyframes loading {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
